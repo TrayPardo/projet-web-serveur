@@ -1,0 +1,62 @@
+<main class="main">
+    <h1 class="titre-page">Inventaire de la boutique</h1>
+    <p class="sous-titre">Gérez vos produits, vos stocks et vos promotions.</p>
+
+    <section class="carte-form" id="ajout">
+        <h2>Ajouter un produit</h2>
+        <form id="form-ajout" novalidate>
+            <div class="form-grille">
+                <div class="champ">
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom" placeholder="Ex. : Cahier ligné">
+                    <span class="erreur" id="erreur-nom"></span>
+                </div>
+                <div class="champ">
+                    <label for="categorie">Catégorie</label>
+                    <input type="text" id="categorie" placeholder="Ex. : Papeterie">
+                    <span class="erreur" id="erreur-categorie"></span>
+                </div>
+                <div class="champ">
+                    <label for="prix">Prix ($)</label>
+                    <input type="number" id="prix" step="0.01" placeholder="4.99">
+                    <span class="erreur" id="erreur-prix"></span>
+                </div>
+                <div class="champ">
+                    <label for="quantite">Quantité</label>
+                    <input type="number" id="quantite" placeholder="25">
+                    <span class="erreur" id="erreur-quantite"></span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn--principal">Ajouter le produit</button>
+        </form>
+    </section>
+
+    <section id="liste">
+        <div class="liste" id="liste-produits">
+            {{#each produits}}
+                <article class="carte {{#if en_promotion}}carte--promo{{/if}}" data-id="{{id_produit}}">
+                    {{#if en_promotion}}
+                        <span class="badge badge--promo">🔥 En promotion</span>
+                    {{else}}
+                        <span class="badge">Prix régulier</span>
+                    {{/if}}
+
+                    <h3 class="carte__titre">{{nom}}</h3>
+                    <p class="carte__infos">{{categorie}} · Stock : {{quantite}}</p>
+                    <p class="prix">{{prix}} $</p>
+
+                    <div class="carte__actions">
+                        <button class="btn btn--etat btn-promotion">
+                            {{#if en_promotion}}Retirer la promo{{else}}Mettre en promo{{/if}}
+                        </button>
+                        <button class="btn btn--danger btn-supprimer">Supprimer</button>
+                    </div>
+                </article>
+            {{/each}}
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p><strong>MaBoutique</strong> · Préparé par Tracy Pardo · Évaluation sommative 2</p>
+</footer>
